@@ -26,23 +26,37 @@ class snrCalc():
 
         print("Done!")
     def matchTwoFiles(self,_file1,_file2):
-        newFile = open("expCorr.txt", "w")
-        with open(_file1, "r") as file1:
-                for i, line in enumerate(file1):
-                    if i==100:
-                        break
+        #newFile = open("expCorr.txt", "w")
+        new_input=list()
 
-                    line = line.rstrip("\n")
-                    protein1=line.split('\t')[0]
-                    protein2=line.split('\t')[1]
-                    with open(_file2, "r") as file2:
-                        for j, line2 in enumerate(file2):
+        with open(_file1, "r") as file:
+            file1 = file.readlines()
 
-                            line2 = line2.rstrip("\n")
-                            protein3 = line2.split('\t')[0]
-                            protein4 = line2.split('\t')[1]
+        with open(_file2, "r") as file:
+            file2 = file.readlines();
 
-                            if (((protein1==protein3) and (protein2==protein4)) or ((protein2==protein3) and (protein1==protein4))):
-                                input_data = ("\t".join((protein1, protein2)))
-                                newFile.write(input_data + "\n")
+        for line in file1:
+            if line==100:
+                break
+            striped_line = line.rstrip("\n")
+            protein1 = striped_line.split('\t')[0]
+            protein2 = striped_line.split('\t')[1]
+
+            for line2 in file2:
+                striped_line2 = line2.rstrip("\n")
+                protein3 = striped_line2.split('\t')[0]
+                protein4 = striped_line2.split('\t')[1]
+
+                if(((protein1 == protein3) and (protein2 == protein4))
+                    or ((protein2 == protein3) and (protein1 == protein4))):
+                    input_data = "\t".join([protein1, protein2, striped_line2.split('\t')[2]])
+                    new_input.append(input_data)
+
+        return (new_input)
+
+    def appendListToFile(self, _file, _list):
+        with open(_file,"a+") as file:
+            for line in _list:
+                file.write(line + "\n")
+
         print("Done")

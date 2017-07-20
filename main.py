@@ -6,8 +6,11 @@ from snrCalc import snrCalc
 
 snrcalc = snrCalc()
 
-
+'''
 snrcalc.rowSplit("rosetta.txt", 1000000, 100)
 '''
-snrcalc.matchTwoFiles("combined_files.txt", "rosetta_2000000_1.txt")
+
+snrCalc.appendListToFile("expCor.txt", snrCalc.matchTwoFiles("combined_files.txt", "test.txt","test.txt"))
+'''
+snrCalc.matchTwoFiles("combined_files.txt","test.txt","test.txt")
 '''
