@@ -26,7 +26,7 @@ class snrCalc():
 
     ##NEW APPROACH
 
-    def sortingFiles(self, _file, _file2):
+    def sortingFiles(self, _file, _file2, threshold):
         dict_rosetta = dict()
         signal = 0
         noise = 0
@@ -56,8 +56,8 @@ class snrCalc():
 
         for i, pp in enumerate(listOfFiles):
             if pp in dict_rosetta:
-                if (float(dict_rosetta[pp])) >= 0.7:
+                if (float(dict_rosetta[pp])) >= threshold:
                     signal += 1
                 else:
                     noise += 1
-        print (signal, noise)
+        print (signal, noise, signal/noise)
